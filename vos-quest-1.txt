@@ -1,0 +1,193 @@
+uses
+  SysUtils, StdCtrls, Controls, Forms, Dialogs, Classes;
+
+procedure BuffMage;
+begin
+  Engine.ByPassToServer('_bbshome');  // ALT + B
+  Delay(1000);
+  Engine.ByPassToServer('12'); //   //   Buff - Main
+  Delay(1000);
+  Engine.ByPassToServer('1c'); //   //   Buff - Fightee
+  Delay(1000);
+  Engine.ByPassToServer('19'); //   //   Buffing
+end;
+
+procedure TeleportToAden;
+begin
+  Engine.ByPassToServer('_bbshome');  // ALT + B
+  Delay(1000);
+  Engine.ByPassToServer('13'); //   //   Teleport sheet
+  Delay(1000);
+  Engine.ByPassToServer('114');  // Teleport - All Cities
+  Delay(1000);
+  Engine.ByPassToServer('19'); // teleport - City - Aden
+  Delay(1000);
+  Engine.ByPassToServer('19');  // Teleport - City - Aden - Center
+  Delay(1000);
+end;
+
+procedure TeleportToValleyOfSaint;
+begin
+  Engine.ByPassToServer('_bbshome');  // ALT + B
+  Delay(1000);
+  Engine.ByPassToServer('13'); //   //   Teleport sheet
+  Delay(1000);
+  Engine.ByPassToServer('11a');  // Teleport - C4 page
+  Delay(1000);
+  Engine.ByPassToServer('117'); // teleport - C4 - Vally of Saint
+  Delay(1000);
+  Engine.MoveTo(37992,-72012,-3728);
+  Engine.MoveTo(68056,-71736,-3704);
+end;
+
+
+procedure TeleportToValleyOfSaintGraveArea;
+begin
+  Engine.ByPassToServer('_bbshome');  // ALT + B
+  Delay(1000);
+  Engine.ByPassToServer('13'); //   //   Teleport sheet
+  Delay(1000);
+  Engine.ByPassToServer('11a');  // Teleport - C4 page
+  Delay(1000);
+  Engine.ByPassToServer('118'); // teleport - C4 - Vally of Saint
+  Delay(1000);
+  Engine.MoveTo(80024,-83800,-3624);
+  Engine.MoveTo(78888,-83160,-3624);
+  Engine.MoveTo(78136,-82696,-3624);  
+end;
+
+procedure QuestVoS;
+var
+  item: TL2Item;
+begin
+  BuffMage;
+  Delay(2000);
+
+  TeleportToValleyOfSaint;
+  Delay(2000);
+
+  TakeQuest;
+
+  Engine.FaceControl (0, true);
+
+  while CheckItemCount(7171, True) < 300 do 
+  begin
+    Delay (10 * 1000);
+  end;
+
+  Engine.FaceControl (0, false);
+  Delay(2000);
+  
+ if User.InCombat then
+    begin
+     saveSelf;
+    end; 
+
+    Delay(20000);
+	
+	  TeleportToValleyOfSaint;
+	  Delay(2000);
+   
+    TakeQuest;
+    Delay(2000);
+    
+    TeleportToValleyOfSaintGraveArea;
+    Delay(2000);
+
+    GiveQuestItem;
+    Delay(2000);
+
+    TeleportToValleyOfSaint;
+    Delay(2000);
+
+    TakeQuest;
+    Delay(2000);
+    
+    Engine.ByPassToServer('04');  // Take Quest Reward - Mold Hardened
+
+  
+
+end;
+
+procedure TakeQuest;
+begin
+
+      
+  Engine.SetTarget(31518); // select Mysterious Necromancer
+  Engine.DlgOpen;				// open chat with NPC
+  Delay (200);
+  
+  Engine.ByPassToServer('00');  // Take Quest  - step1
+  Delay(1000);
+
+  Engine.ByPassToServer('00');  // Take Quest  - step2
+  Delay(1000);
+end;
+
+
+procedure GiveQuestItem;
+begin
+
+  Engine.SetTarget(31519); // select Mysterious Necromancer
+  Engine.DlgOpen;				// open chat with NPC
+  Delay (200);
+  
+  Engine.ByPassToServer('00');  // Take Quest  - step1
+  Delay(1000);
+
+  Engine.ByPassToServer('00');  // Take Quest  - step2
+  Delay(1000);
+  
+
+end;  
+
+
+
+procedure saveSelf;
+begin
+  while (not User.Target.Dead) and (User.target <> nil) do
+    begin
+      Engine.FaceControl (0, true);
+      delay(500);
+    end;
+  if (User.Target.Dead) and (User.target <> nil) then
+    begin
+      Engine.FaceControl (0, false);
+      delay(1500);
+    end;
+end;
+
+function CheckItemCount (const itemID: Integer; const quest: Boolean = False) : Integer;
+var tempItem: TL2Item;
+begin
+   if quest then Inventory.Quest.ByID(itemID, tempItem)
+   else Inventory.User.ByID(itemID, tempItem);
+   Result := tempItem.Count;
+end;
+
+procedure DialogViewParse;
+var L:TStringList;
+begin
+  print(Engine.DlgText);
+  L := TStringList.Create;          //Создаем объект (список для строк)
+  L.Add(Engine.DlgText);                 //Добавляем в список строку
+  L.SaveToFile('vos.html');  //Сохраняем список в файл
+  L.Free;  
+end;
+
+
+
+begin
+
+ Engine.FaceControl (0, false);
+
+ while CheckItemCount(4041, True) < 300 do 
+  begin
+     QuestVoS; 
+  end;
+
+
+
+
+  
+end.
