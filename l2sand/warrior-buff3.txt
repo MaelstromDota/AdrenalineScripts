@@ -1,0 +1,39 @@
+var buff: TL2Effect;
+procedure saveSelf;
+begin
+while (not User.Target.Dead) and (User.target <> nil) do
+begin
+  Engine.Attack;
+  delay(500);
+end;
+if (User.Target.Dead) and (User.target <> nil) then
+begin
+  Engine.CancelTarget;
+  delay(1500);
+end;  
+end;
+procedure heroBuff;
+begin
+  if not (User.InCombat) then
+  begin
+    Engine.BypassToServer('_bbshome');
+    delay(500);
+    Engine.BypassToServer('12');
+    delay(500);
+    Engine.BypassToServer('1b');
+    delay(500);
+    Engine.BypassToServer('19');
+    delay(500);
+    Engine.FaceControl(1, true);
+    delay(2000);
+  end else begin
+      saveSelf;
+  end;
+end;
+begin while 1<>2 do begin
+    if not User.Buffs.ByID(1502, buff) then begin
+        Engine.FaceControl(1, false);
+        heroBuff;
+    end;
+end;
+end.
