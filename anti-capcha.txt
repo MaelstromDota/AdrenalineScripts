@@ -5,9 +5,9 @@ begin
       delay(500) ;
         if Captcha <> Engine.DlgText then
           begin
-            Captcha := Engine.DlgText; // Проверка на наличие диалога
-              if (Pos('защиты от ботов', Captcha) <> 0) then // Проверка на содержание диалогового окна
-                PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться
+            Captcha := Engine.DlgText; // РџСЂРѕРІРµСЂРєР° РЅР° РґРёР°Р»РѕРі
+              if (Pos('Р·Р°С‰РёС‚С‹ РѕС‚ Р±РѕС‚РѕРІ', Captcha) <> 0) then // РџСЂРѕРІРµСЂРєР° РЅР° СЃРѕРґРµСЂР¶РёРјРѕРµ РґРёР°Р»РѕРіРѕРІРѕРіРѕ РѕРєРЅР°
+                PlaySound('Sounds/PlayerAlarm.wav',false); // Р—РІСѓРє РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ РїСЂРѕРёРіСЂС‹РІР°С‚СЊСЃСЏ
                 Delay(1800);
           end;
     end;
