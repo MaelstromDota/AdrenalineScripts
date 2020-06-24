@@ -5,13 +5,12 @@ begin
       delay(500) ;
         if Captcha <> Engine.DlgText then
           begin
-            Captcha := Engine.DlgText; // Проверка на наличие диалога
-              if (Pos('защиты от ботов', Captcha) <> 0) then // Проверка на содержание диалогового окна
+            Captcha := Engine.DlgText; // РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ РґРёР°Р»РѕРіР°
+              if (Pos('Р·Р°С‰РёС‚С‹ РѕС‚ Р±РѕС‚РѕРІ', Captcha) <> 0) then // РџСЂРѕРІРµСЂРєР° РЅР° СЃРѕРґРµСЂР¶Р°РЅРёРµ РґРёР°Р»РѕРіРѕРІРѕРіРѕ РѕРєРЅР°
                 begin
-                  //PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться	
-                  PlaySound(ExePath + '/Sounds/PlaayerAlarm.wav'); // Звук который будет проигрываться
-                  Engine.BlinkWindow(true); // Мигание окна
-                  //Engine.SetGameWindow(true); // Развернуть окно
+                  PlaySound('Sounds/PlayerAlarm.wav',false); // Р—РІСѓРє РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ РїСЂРѕРёРіСЂС‹РІР°С‚СЊСЃСЏ	
+                  Engine.BlinkWindow(true); // РњРёРіР°РЅРёРµ РѕРєРЅР°
+                  //Engine.SetGameWindow(true); // Р Р°Р·РІРµСЂРЅСѓС‚СЊ РѕРєРЅРѕ
                 end;
                 Delay(1800);
           end;
