@@ -1,0 +1,10 @@
+uses SysUtils, Classes;
+var L:TStringList;
+
+begin
+  print(Engine.DlgText);
+  L := TStringList.Create;          //Создаем объект (список для строк)
+  L.Add(Engine.DlgText);                 //Добавляем в список строку
+  L.SaveToFile('C:/1.html');  //Сохраняем список в файл
+  L.Free;  
+end.

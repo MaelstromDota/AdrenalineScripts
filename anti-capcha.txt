@@ -1,0 +1,14 @@
+var Captcha:string;
+begin
+  while true do
+    begin
+      delay(500) ;
+        if Captcha <> Engine.DlgText then
+          begin
+            Captcha := Engine.DlgText; // ѕроверка на наличие диалога
+              if (Pos('защиты от ботов', Captcha) <> 0) then // ѕроверка на содержание диалогового окна
+                PlaySound('Sounds/PlayerAlarm.wav',false); // «вук который будет проигрыватьс€
+                Delay(1800);
+          end;
+    end;
+end.
