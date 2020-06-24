@@ -1,0 +1,19 @@
+var Captcha:string;
+begin
+  while true do
+    begin
+      delay(500) ;
+        if Captcha <> Engine.DlgText then
+          begin
+            Captcha := Engine.DlgText; // Проверка на наличие диалога
+              if (Pos('защиты от ботов', Captcha) <> 0) then // Проверка на содержание диалогового окна
+                begin
+                  //PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться	
+                  PlaySound(ExePath + '/Sounds/PlaayerAlarm.wav'); // Звук который будет проигрываться
+                  Engine.BlinkWindow(true); // Мигание окна
+                  //Engine.SetGameWindow(true); // Развернуть окно
+                end;
+                Delay(1800);
+          end;
+    end;
+end.
