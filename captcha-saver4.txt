@@ -1,0 +1,33 @@
+// ==================================
+// = Скрипт на предупреждение капчи =
+// =              +                 =
+// =   сохранения последней капчи   =
+// ==================================
+
+uses SysUtils, Classes;
+var L:TStringList;
+var Captcha:string;
+begin
+  print('by SniperX');
+  while true do
+    begin
+      delay(500) ;
+        if Captcha <> Engine.DlgText then
+          begin
+            Captcha := Engine.DlgText; // Проверка на наличие диалога
+              if (Pos('защиты от ботов', Captcha) <> 0) or (Pos('bot protection', Captcha) <> 0) then // Проверка на содержание диалогового окна
+                begin
+                  print('Captcha Found!');
+                  PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться 
+                  Engine.BlinkWindow(true); // Мигание окна
+                  //Engine.SetGameWindow(true); // Развернуть окно (NOT WORKING!)
+                  print(Engine.DlgText);
+                  L := TStringList.Create; // Создать объект
+                  L.Add(Engine.DlgText); // Добавить в объект
+                  L.SaveToFile(ExePath + 'Scripts\captcha.html');  // Сохранить объект как html файл
+                  L.Free; 
+                end;
+                Delay(1800);
+          end;
+    end;
+end.
