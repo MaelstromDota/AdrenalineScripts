@@ -2,8 +2,10 @@
 // = Скрипт на предупреждение капчи =
 // =              +                 =
 // =   сохранения последней капчи   =
-// = ПОСЛЕ КАПЧИ НАДО ПЕРЕЗАПУСТИТЬ =
-// =        ДАННЫЙ СКРИПТ           =
+// ==================================
+// =    Капча сохраняется в папке   =
+// =  Scripts внутри папки с самим  =
+// =           Adrenaline           =
 // ==================================
 
 uses SysUtils, Classes;
@@ -20,13 +22,13 @@ begin
               if (Pos('защиты от ботов', Captcha) <> 0) or (Pos('bot protection', Captcha) <> 0) then // Проверка на содержание диалогового окна
                 begin
                   print('Captcha Found!');
-                  PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться 
+                  PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться
                   Engine.BlinkWindow(true); // Мигание окна
                   //Engine.SetGameWindow(true); // Развернуть окно (NOT WORKING!)
                   print(Engine.DlgText);
                   L := TStringList.Create; // Создать объект
                   L.Add(Engine.DlgText); // Добавить в объект
-                  L.SaveToFile(ExePath + 'Scripts\captcha.html');  // Сохранить объект как html файл
+                  L.SaveToFile(ExePath + 'Scripts\captcha' + DateToStr(Date) + '_' + IntToStr(Engine.ServerTime) + '.html');  // Сохранить объект как html файл
                   L.Free; 
                 end;
                 Delay(1800);
