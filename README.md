@@ -17,4 +17,6 @@
 [LVL Up (OBT) - повышение уровня во время ОБТ](https://github.com/MaelstromDota/adrenalinscripts/blob/master/l2sand/lvl-up_OBT)
 
 ### Универсальные скрипты
+![epilogue Logo](/images/epilogue.png)
+
 [HTML Saver - сохранение диалога как html файл](https://github.com/MaelstromDota/adrenalinscripts/blob/master/universal/html_saver.txt)
