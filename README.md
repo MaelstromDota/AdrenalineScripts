@@ -7,7 +7,7 @@
 
 [Anti-Captcha - предупреждение о капче](https://github.com/MaelstromDota/adrenalinscripts/blob/master/gamethrone/anti-captcha.txt)
 
-[Anti-Captcha - предупреждение о капче (OLD)](https://github.com/MaelstromDota/adrenalinscripts/blob/master/gamethrone/anti-captcha_old.txt)
+[Anti-Captcha (OLD) - предупреждение о капче (OLD)](https://github.com/MaelstromDota/adrenalinscripts/blob/master/gamethrone/anti-captcha_old.txt)
 
 [Anti-Captcha Saver - предупреждение о капче и сохранение капчи как html файл](https://github.com/MaelstromDota/adrenalinscripts/blob/master/gamethrone/anti-captcha_saver.txt)
 
