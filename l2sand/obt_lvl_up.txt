@@ -1,6 +1,0 @@
-begin while 1<>2 do begin
-    Engine.BypassToServer('112');
-    delay(500);
-    Engine.BypassToServer('00');
-    end
-end.
