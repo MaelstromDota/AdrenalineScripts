@@ -1,0 +1,10 @@
+uses SysUtils, Classes;
+var L:TStringList;
+
+begin
+  print(Engine.DlgText);
+  L := TStringList.Create; // Создать объект
+  L.Add(Engine.DlgText); // Добавить в объект строки
+  L.SaveToFile(ExePath + 'Scripts/1.html'); // Сохранить в html файл
+  L.Free;  
+end.
