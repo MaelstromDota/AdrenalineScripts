@@ -1,4 +1,4 @@
-# AdrenalinScripts - Lineage II - Gracia Epilogue
+# AdrenalineScripts - Lineage II - Gracia Epilogue
 Здесь находятся скрипты для бота Adrenaline
 
 ## Скрипты
