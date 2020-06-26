@@ -1,3 +1,7 @@
+// =================================
+// = РЎРєСЂРёРїС‚ РјРѕР¶РµС‚ Р±С‹С‚СЊ РЅРµ Р°РєС‚СѓР°Р»РµРЅ =
+// =================================
+
 uses
   SysUtils, StdCtrls, Controls, Forms, Dialogs, Classes;
 
@@ -169,9 +173,9 @@ procedure DialogViewParse;
 var L:TStringList;
 begin
   print(Engine.DlgText);
-  L := TStringList.Create;          //Создаем объект (список для строк)
-  L.Add(Engine.DlgText);                 //Добавляем в список строку
-  L.SaveToFile('vos.html');  //Сохраняем список в файл
+  L := TStringList.Create;          //Г‘Г®Г§Г¤Г ГҐГ¬ Г®ГЎГєГҐГЄГІ (Г±ГЇГЁГ±Г®ГЄ Г¤Г«Гї Г±ГІГ°Г®ГЄ)
+  L.Add(Engine.DlgText);                 //Г„Г®ГЎГ ГўГ«ГїГҐГ¬ Гў Г±ГЇГЁГ±Г®ГЄ Г±ГІГ°Г®ГЄГі
+  L.SaveToFile('vos.html');  //Г‘Г®ГµГ°Г Г­ГїГҐГ¬ Г±ГЇГЁГ±Г®ГЄ Гў ГґГ Г©Г«
   L.Free;  
 end;
 
