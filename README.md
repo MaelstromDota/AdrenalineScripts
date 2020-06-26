@@ -3,6 +3,8 @@
 
 ## Скрипты
 ### Для сервера gamethrone.ru:
+![gamethrone Logo](/images/gamethrone.png)
+
 [Anti-Captcha - предупреждение о капче](https://github.com/MaelstromDota/adrenalinscripts/blob/master/gamethrone/anti-captcha.txt)
 
 [Anti-Captcha - предупреждение о капче (OLD)](https://github.com/MaelstromDota/adrenalinscripts/blob/master/gamethrone/anti-captcha_old.txt)
@@ -10,6 +12,8 @@
 [Anti-Captcha Saver - предупреждение о капче и сохранение капчи как html файл](https://github.com/MaelstromDota/adrenalinscripts/blob/master/gamethrone/anti-captcha_saver.txt)
 
 ### Для сервера L2sand.ru
+![L2sand Logo](/images/l2sand.png)
+
 [LVL Up (OBT) - повышение уровня во время ОБТ](https://github.com/MaelstromDota/adrenalinscripts/blob/master/l2sand/lvl-up_OBT)
 
 ### Универсальные скрипты
