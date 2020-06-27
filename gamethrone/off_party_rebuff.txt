@@ -2,7 +2,7 @@ uses SysUtils, Classes;
 
 var
   BuffID: integer = 1009;         // ID бафа, по которому проверять необходимость ребафа
-  RebuffTime: cardinal = 60000;   // время до окончания бафа для ребафа (в мс)
+  RebuffTime: cardinal = 1000;   // время до окончания бафа для ребафа (в мс)
 
 procedure Rebuff_Thread();
 var X, Y, Z: integer;
