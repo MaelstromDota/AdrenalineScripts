@@ -1,17 +1,17 @@
 uses SysUtils, Classes;
 
 var
-  BuffID: integer = 1009;         // ID бафа, по которому проверять необходимость ребафа
-  RebuffTime: cardinal = 60000;   // время до окончания бафа для ребафа (в мс)
+  BuffID: integer = 1009;         // ID Р±Р°С„Р°, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ РїСЂРѕРІРµСЂСЏС‚СЊ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚СЊ СЂРµР±Р°С„Р°
+  RebuffTime: cardinal = 60000;   // РІСЂРµРјСЏ РґРѕ РѕРєРѕРЅС‡Р°РЅРёСЏ Р±Р°С„Р° РґР»СЏ СЂРµР±Р°С„Р° (РІ РјСЃ)
 
 procedure Rebuff_Thread();
 var X, Y, Z: integer;
 begin
   while 1<>2 do begin
     if (BuffTime(BuffID) < RebuffTime) then begin
-    Engine.InviteParty('ELLA'); // Приглашение бафффера
+    Engine.InviteParty('ELLA'); // РџСЂРёРіР»Р°С€РµРЅРёРµ Р±Р°С„С„С„РµСЂР°
     delay(5000);
-    Engine.DismissParty('ELLA'); // Кик баффера
+    Engine.DismissParty('ELLA'); // РљРёРє Р±Р°С„С„РµСЂР°
     end;
     delay(3000);
   end;
@@ -21,9 +21,9 @@ function BuffTime(ID: integer): cardinal;
 var i: integer;
 begin
   result:= 0;
-  for i:= 0 to User.Buffs.Count-1 do begin        // пробегаем по списку своих бафов
-    if (User.Buffs.Items(i).id = ID) then begin   // если ID совпал, то
-      result:= User.Buffs.Items(i).EndTime;       // записываем в результат время до окончания бафа
+  for i:= 0 to User.Buffs.Count-1 do begin        // РїСЂРѕР±РµРіР°РµРј РїРѕ СЃРїРёСЃРєСѓ СЃРІРѕРёС… Р±Р°С„РѕРІ
+    if (User.Buffs.Items(i).id = ID) then begin   // РµСЃР»Рё ID СЃРѕРІРїР°Р», С‚Рѕ
+      result:= User.Buffs.Items(i).EndTime;       // Р·Р°РїРёСЃС‹РІР°РµРј РІ СЂРµР·СѓР»СЊС‚Р°С‚ РІСЂРµРјСЏ РґРѕ РѕРєРѕРЅС‡Р°РЅРёСЏ Р±Р°С„Р°
       break;
     end;
   end;
@@ -38,13 +38,13 @@ begin
       delay(500) ;
         if Captcha <> Engine.DlgText then
           begin
-            Captcha := Engine.DlgText; // Проверка на наличие диалога
-              if (Pos('защиты от ботов', Captcha) <> 0) or (Pos('bot protection', Captcha) <> 0) then // Проверка на содержание диалогового окна
+            Captcha := Engine.DlgText; // РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ РґРёР°Р»РѕРіР°
+              if (Pos('Р·Р°С‰РёС‚С‹ РѕС‚ Р±РѕС‚РѕРІ', Captcha) <> 0) or (Pos('bot protection', Captcha) <> 0) then // РџСЂРѕРІРµСЂРєР° РЅР° СЃРѕРґРµСЂР¶Р°РЅРёРµ РґРёР°Р»РѕРіРѕРІРѕРіРѕ РѕРєРЅР°
                 begin
                   print('Captcha Found!');
-                  PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться 
-                  Engine.BlinkWindow(true); // Мигание окна
-                  //Engine.SetGameWindow(true); // Развернуть окно (NOT WORKING!)
+                  PlaySound('Sounds/PlayerAlarm.wav',false); // Р—РІСѓРє РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ РїСЂРѕРёРіСЂС‹РІР°С‚СЊСЃСЏ 
+                  Engine.BlinkWindow(true); // РњРёРіР°РЅРёРµ РѕРєРЅР°
+                  //Engine.SetGameWindow(true); // Р Р°Р·РІРµСЂРЅСѓС‚СЊ РѕРєРЅРѕ (NOT WORKING!)
                 end;
                 Delay(1800);
           end;
