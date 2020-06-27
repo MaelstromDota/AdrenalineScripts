@@ -1,0 +1,61 @@
+uses SysUtils, Classes;
+
+var
+  BuffID: integer = 1009;         // ID бафа, по которому проверять необходимость ребафа
+  RebuffTime: cardinal = 60000;   // время до окончания бафа для ребафа (в мс)
+
+procedure Rebuff_Thread();
+var X, Y, Z: integer;
+begin
+  while 1<>2 do begin
+    if (BuffTime(BuffID) < RebuffTime) then begin
+    Engine.InviteParty('ELLA'); // Приглашение бафффера
+    delay(5000);
+    Engine.DismissParty('ELLA'); // Кик баффера
+    end;
+    delay(3000);
+  end;
+end;
+
+function BuffTime(ID: integer): cardinal;
+var i: integer;
+begin
+  result:= 0;
+  for i:= 0 to User.Buffs.Count-1 do begin        // пробегаем по списку своих бафов
+    if (User.Buffs.Items(i).id = ID) then begin   // если ID совпал, то
+      result:= User.Buffs.Items(i).EndTime;       // записываем в результат время до окончания бафа
+      break;
+    end;
+  end;
+end;
+
+procedure AntiCaptcha_Thread();
+var Captcha:string;
+begin
+  print('by SniperX');
+  while true do
+    begin
+      delay(500) ;
+        if Captcha <> Engine.DlgText then
+          begin
+            Captcha := Engine.DlgText; // Проверка на наличие диалога
+              if (Pos('защиты от ботов', Captcha) <> 0) or (Pos('bot protection', Captcha) <> 0) then // Проверка на содержание диалогового окна
+                begin
+                  print('Captcha Found!');
+                  PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться 
+                  Engine.BlinkWindow(true); // Мигание окна
+                  //Engine.SetGameWindow(true); // Развернуть окно (NOT WORKING!)
+                end;
+                Delay(1800);
+          end;
+    end;
+end;
+
+begin
+  //delay(3000);
+  Script.NewThread(@Rebuff_Thread);
+  delay(555);
+  Script.NewThread(@AntiCaptcha_Thread);
+  //delay(3000);
+  Delay(-1);
+end.
