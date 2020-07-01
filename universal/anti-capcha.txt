@@ -1,0 +1,28 @@
+// ==================================
+// = Скрипт на предупреждение капчи =
+// ==================================
+// =   CaptchaText заменить на ваш  =
+// =     текст в окошке с капчой    =
+// ==================================
+var
+  Captcha:string;
+  CaptchaText: string = 'защиты от ботов'; // Заменить 'защиты от ботов' на текст в окошке с вашей капчой
+begin
+  print('GitHub: MaelstromDota/AdrenalineScripts');
+  while true do
+    begin
+      delay(500) ;
+        if Captcha <> Engine.DlgText then
+          begin
+            Captcha := Engine.DlgText; // Проверка на наличие диалога
+              if (Pos(CaptchaText, Captcha) <> 0) then // Проверка на содержание диалогового окна
+                begin
+                  print('Captcha Found!');
+                  PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться 
+                  Engine.BlinkWindow(true); // Мигание окна
+                  //Engine.SetGameWindow(true); // Развернуть окно (NOT WORKING!)
+                end;
+                Delay(1800);
+          end;
+    end;
+end.
