@@ -1,16 +1,18 @@
 var
-int: integer;
-mob: tl2npc;
-sweep: tl2skill;
+  int: integer;
+  mob: tl2npc;
+  sweep: tl2skill;
+  sweepingdelay: cardinal = 300; // Задержка
 
 begin
-while 1<>2 do begin
-for int:=0 to npclist.count-1 do begin
-mob := npclist.items(int);
-if mob.valid and mob.dead and mob.sweepable and skilllist.byid(42,sweep) and (sweep.endtime = 0) then
-if (user.distto(mob) < 300) then //max range of sweeping
-if engine.settarget(mob) then engine.useskill(sweep);
-end;
-delay(300); // 0,3sec delay
-end;
+  print('GitHub: MaelstromDota/AdrenalineScripts');
+  while 1<>2 do begin
+    for int:=0 to npclist.count-1 do begin
+      mob := npclist.items(int);
+      if mob.valid and mob.dead and mob.sweepable and skilllist.byid(42,sweep) and (sweep.endtime = 0) then // Поиск заспойленных мертвых мобов
+      if (user.distto(mob) < 300) then // Max range of sweeping
+      if engine.settarget(mob) then engine.useskill(sweep);
+    end;
+    delay(sweepingdelay);
+  end;
 end.
