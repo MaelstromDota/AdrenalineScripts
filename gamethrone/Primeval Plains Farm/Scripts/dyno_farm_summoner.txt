@@ -1,24 +1,22 @@
-// Данный скрипт надо призывать на суммонере стоящий на Research Facility
-
 var
-  FarmerNick: string = 'iFarmer'; // Ник фармера
-  SummonID: cardinal = 1403; // ID суммона
+  FarmerNick: string = 'GoFarm'; // РќРёРє С„Р°СЂРјРµСЂР°
+  SummonID: cardinal = 1403; // ID СЃСѓРјРјРѕРЅР°
 
 function InParty(): boolean;
 begin
-  result:= Party.Chars.Count > 0;   // если кол-во игроков в нашей пати > 0, то вернёт true 
+  result:= Party.Chars.Count > 0;   // РµСЃР»Рё РєРѕР»-РІРѕ РёРіСЂРѕРєРѕРІ РІ РЅР°С€РµР№ РїР°С‚Рё > 0, С‚Рѕ РІРµСЂРЅС‘С‚ true 
 end;
 
 begin
   while 1<>2 do begin
     if InParty() then begin
      delay(500);
-     print('Делаю суммон');
+     print('Р”РµР»Р°СЋ СЃСѓРјРјРѕРЅ');
      Engine.SetTarget(FarmerNick);
      delay(555);
      Engine.UseSkill(SummonID);
      delay(555);
-     print('Выхожу из пати');
+     print('Р’С‹С…РѕР¶Сѓ РёР· РїР°С‚Рё');
      Engine.LeaveParty;
      end;
   delay(1800);
