@@ -1,0 +1,49 @@
+var
+  int: integer;
+  mob: tl2npc;
+  sweep: tl2skill;
+  sweepingdelay: cardinal = 300; // Задержка
+
+procedure AutoSweep;
+begin
+  while 1<>2 do begin
+    for int:=0 to npclist.count-1 do begin
+      mob := npclist.items(int);
+      if mob.valid and mob.dead and mob.sweepable and skilllist.byid(42,sweep) and (sweep.endtime = 0) then // Поиск заспойленных мертвых мобов
+      if (user.distto(mob) < 300) then // Max range of sweeping
+      if engine.settarget(mob) then engine.useskill(sweep);
+    end;
+    delay(sweepingdelay);
+  end;
+end;
+
+procedure AntiCaptcha_Thread;
+var Captcha:string;
+begin
+  print('by SniperX');
+  while true do
+    begin
+      delay(500) ;
+        if Captcha <> Engine.DlgText then
+          begin
+            Captcha := Engine.DlgText; // Проверка на наличие диалога
+              if (Pos('защиты от ботов', Captcha) <> 0) or (Pos('bot protection', Captcha) <> 0) then // Проверка на содержание диалогового окна
+                begin
+                  print('Captcha Found!');
+                  PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться 
+                  Engine.BlinkWindow(true); // Мигание окна
+                  //Engine.SetGameWindow(true); // Развернуть окно (NOT WORKING!)
+                end;
+                Delay(1800);
+          end;
+    end;
+end;
+
+begin
+  //delay(3000);
+  Script.NewThread(@AntiCaptcha_Thread);
+  delay(555);
+  Script.NewThread(@AutoSweep);
+  //delay(3000);
+  Delay(-1);
+end.
