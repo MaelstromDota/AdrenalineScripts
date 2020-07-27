@@ -1,0 +1,39 @@
+{
+Описание:
+	Активировать скрипт и при однократном нажатии на клавиши, будет произведен релог на окно выбора пресонажа.
+	Клавиша активации находится в константе VK_key ниже.
+	Коды VK клавиш находятся в файле рядом. Код в ДЕСЯТИЧНОЙ системе счисления.
+}
+
+uses
+  SysUtils, Classes;
+
+const
+	VK_key =							81;	// VK код (десятичный) клавиши, при нажатии которой будет релог  81 = Q
+
+procedure keyThread;
+var
+  KeyCode, param: integer;
+  Action: TL2Action;
+  int: integer;
+  mob: tl2npc;
+  sweep: tl2skill;
+begin
+	while Engine.Status = lsOnline do begin
+		Action:= Engine.WaitAction([laKey], KeyCode, param);
+		if (Action = laKey) and (KeyCode = VK_key) then begin
+				for int:=0 to npclist.count-1 do begin
+				  mob := npclist.items(int);
+				  if mob.valid and mob.dead and mob.sweepable and skilllist.byid(42,sweep) and (sweep.endtime = 0) then // Поиск заспойленных мертвых мобов
+				  if (user.distto(mob) < 300) then // Max range of sweeping
+				  if engine.settarget(mob) then engine.useskill(sweep);
+				end;
+		end;
+	end;
+end;
+
+begin
+	print('*** Скрипт автосвипа ***');
+	print('Для активации свипа нажмите клавишу VK_'+inttostr(VK_key));
+while true do keyThread;
+end. 
