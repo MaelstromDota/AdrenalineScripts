@@ -1,0 +1,94 @@
+// Данный скрипт надо запускать на фармере дино острова
+
+uses SysUtils, Classes;
+
+var
+  SummonerNick: string = 'iSummoner'; // Ник суммонера
+
+procedure AntiCaptcha_Thread();
+var Captcha:string;
+begin
+  print('GitHub: MaelstromDota/AdrenalineScripts');
+  print('by SniperX');
+  while true do
+    begin
+      delay(500) ;
+        if Captcha <> Engine.DlgText then
+          begin
+            Captcha := Engine.DlgText; // Проверка на наличие диалога
+              if (Pos('защиты от ботов', Captcha) <> 0) or (Pos('bot protection', Captcha) <> 0) then // Проверка на содержание диалогового окна
+                begin
+                  print('Вылезла капча!');
+                  PlaySound('Sounds/PlayerAlarm.wav',false); // Звук который будет проигрываться 
+                  Engine.BlinkWindow(true); // Мигание окна
+                  //Engine.SetGameWindow(true); // Развернуть окно (NOT WORKING!)
+                end;
+                Delay(1800);
+          end;
+    end;
+end;
+
+procedure FindBypass();
+  var ResultBypass,tmp_bypass:string;
+  var i_bypass,k:integer;
+  begin
+    ResultBypass:='';
+    tmp_bypass := Engine.DlgText;
+    i_bypass:=pos('bypass -h',tmp_bypass);
+    i_bypass:=i_bypass + 10;
+    while not (tmp_bypass[i_bypass] = ' ')
+    and not (tmp_bypass[i_bypass] = '"') do
+    begin
+      ResultBypass:= ResultBypass + tmp_bypass[i_bypass];
+      i_bypass:= i_bypass+1;
+  end;
+  Engine.BypassToServer(ResultBypass, True);
+  //print(ResultBypass);
+end;
+
+procedure Death_Thread();
+begin
+  while true do
+  begin
+	  if (User.dead) then begin
+	    print('Меня убили');
+	    delay(555);
+	    PlaySound('Sounds\kelk.wav', false);
+	    delay(555);
+	    print('Выключаю бота');
+	    Engine.FaceControl(0, false);
+	    delay(1000);
+	    print('Встаю в город');
+      Engine.GoHome(rtTown);
+      delay(5000);
+      print('Суммонюсь');
+      Engine.InviteParty(SummonerNick);
+      delay(13000);
+      print('Принимаю суммон');
+      Engine.ConfirmDialog(true);
+      delay(10000);
+      print('Тепаюсь');
+      Engine.MoveTo(5354, -2607, -2976);
+      delay(555);
+      Engine.SetTarget(32112);
+      delay(555);
+      Engine.DlgOpen;
+      delay(555);
+      FindBypass();
+      delay(1000);
+      print('Бафнись');
+      delay(555);
+      PlaySound('Sounds\dc.wav', false);
+    end;
+    delay(3000);
+	end;
+ end;
+
+begin
+  //delay(3000);
+  Script.NewThread(@AntiCaptcha_Thread);
+  delay(555);
+  Script.NewThread(@Death_Thread);
+  //delay(3000);
+  Delay(-1);
+end.
