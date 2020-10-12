@@ -20,6 +20,8 @@
 
 [LVL Up (OBT) - повышение уровня во время ОБТ](https://github.com/MaelstromDota/adrenalinscripts/blob/master/l2sand/lvl-up_OBT)
 
+[Primeval Plains Farm - после смерти автоматически идёт дальше фармить (МАГ)](https://github.com/MaelstromDota/AdrenalineScripts/blob/master/l2sand/dyno_farm.txt)
+
 ### Универсальные скрипты (Gracia Epilogue):
 ![epilogue Logo](/images/epilogue.png)
 
