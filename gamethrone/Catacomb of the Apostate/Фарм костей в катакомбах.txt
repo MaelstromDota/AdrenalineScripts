@@ -1,1 +1,8 @@
-Скоро...
+Фарм костей в Catacomb of the Apostate + АнтиКапча
+АнтиКапча: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/anti-captcha.txt
+Требования:
+maelstromdota_apostate.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Apostate/Settings/maelstromdota_apostate.zmap
+maelstromdota_apostate_1.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Apostate/Settings/maelstromdota_apostate_1.zmap
+maelstromdota_apostate_2.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Apostate/Settings/maelstromdota_apostate_2.zmap
+maelstromdota_apostate_spoil.xml: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Apostate/Settings/maelstromdota_apostate_spoil.xml
+Загрузить все требуемые файлы в Settings
