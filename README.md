@@ -2,7 +2,7 @@
 Здесь находятся скрипты для бота Adrenaline
 
 ## Скрипты
-### Для сервера [gamethrone.ru](https://gamethrone.ru/) [(Rock x55)](http://forum.gamethrone.ru/threads/opisanie-servera.310/):
+### Для серверов от админа [gamethrone.ru](https://castlegame.ru/) на хрониках Gracia Epilogue [(Low-Rate Craft-PvP x30)](http://forum.castlegame.ru/threads/opisanie-igrovogo-mira.355/):
 ![gamethrone Logo](/images/gamethrone.png)
 
 [Anti-Captcha - предупреждение о капче](https://github.com/MaelstromDota/adrenalinscripts/blob/master/gamethrone/anti-captcha.txt)
