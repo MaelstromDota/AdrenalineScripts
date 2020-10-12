@@ -1,0 +1,65 @@
+uses SysUtils, Classes;
+
+procedure TeleportResearch();
+begin
+  Engine.BypassToServer('_bbshome');
+  delay(1000);
+  Engine.BypassToServer('13');
+  delay(1000);
+  Engine.BypassToServer('11c');
+  delay(1000);
+  Engine.BypassToServer('1c');
+end;
+
+procedure Rebuff();
+begin
+  Engine.BypassToServer('_bbshome');
+  delay(1000);
+  Engine.BypassToServer('12');
+  delay(2000);
+  Engine.BypassToServer('1c');
+  delay(1000);
+  Engine.BypassToServer('19');
+end;
+
+procedure Death_Thread();
+begin
+  while true do
+  begin
+	  if (User.dead) then begin
+	    print('Меня убили');
+	    delay(555);
+	    PlaySound('Sounds\kelk.wav', false);
+	    delay(555);
+	    print('Выключаю бота');
+	    Engine.FaceControl(0, false);
+	    delay(1000);
+	    print('Встаю в город');
+      Engine.GoHome(rtTown);
+      delay(5000);
+      print('Телепортируюсь');
+      TeleportResearch();
+      delay(10000);
+      print('Возвращаюсь');
+      Engine.MoveTo(5354, -2607, -2976);
+      delay(555);
+      Engine.SetTarget(32112);
+      delay(555);
+      Engine.DlgOpen;
+      delay(555);
+      Engine.DlgSel(1);
+      delay(1000);
+      print('Баффаюсь');
+      delay(555);
+      Rebuff();
+      delay(10000);
+      Engine.FaceControl(0, true);
+    end;
+    delay(3000);
+	end;
+ end;
+
+begin
+  Script.NewThread(@Death_Thread);
+  Delay(-1);
+end.
