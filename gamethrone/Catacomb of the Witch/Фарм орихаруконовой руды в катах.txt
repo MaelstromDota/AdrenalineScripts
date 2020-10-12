@@ -9,3 +9,4 @@ maelstromdota_witch_2.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/mast
 maelstromdota_witch_spoil.xml: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch_spoil.xml
 Загрузить все требуемые файлы в Settings
 }
+Сам скрипт: http://tiny.cc/maelstromdota_witch
