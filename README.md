@@ -15,6 +15,8 @@
 
 [Catacomb of the Apostate Farm - спойл костей](https://github.com/MaelstromDota/AdrenalineScripts/tree/master/gamethrone/Catacomb%20of%20the%20Apostate)
 
+[Catacomb of the Witch Farm - спойл орихаруконовой руды](https://github.com/MaelstromDota/AdrenalineScripts/tree/master/gamethrone/Catacomb%20of%20the%20Witch)
+
 ### Для сервера [L2sand.ru](https://l2sand.ru/) [(Craft-PvP x100)](https://forum.l2sand.ru/index.php?/topic/595-opisanie-servera-sand-x100/#entry5435):
 ![L2sand Logo](/images/l2sand.png)
 
