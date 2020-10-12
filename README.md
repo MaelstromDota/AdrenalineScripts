@@ -13,6 +13,8 @@
 
 [Primeval Plains Farm - после смерти автоматически идёт обратно на точку телепортации](https://github.com/MaelstromDota/AdrenalineScripts/tree/master/gamethrone/Primeval%20Plains%20Farm)
 
+[Catacomb of the Apostate Farm - спойл костей](https://github.com/MaelstromDota/AdrenalineScripts/tree/master/gamethrone/Catacomb%20of%20the%20Apostate)
+
 ### Для сервера [L2sand.ru](https://l2sand.ru/) [(Craft-PvP x100)](https://forum.l2sand.ru/index.php?/topic/595-opisanie-servera-sand-x100/#entry5435):
 ![L2sand Logo](/images/l2sand.png)
 
