@@ -6,3 +6,4 @@ maelstromdota_apostate_1.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/m
 maelstromdota_apostate_2.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Apostate/Settings/maelstromdota_apostate_2.zmap
 maelstromdota_apostate_spoil.xml: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Apostate/Settings/maelstromdota_apostate_spoil.xml
 Загрузить все требуемые файлы в Settings
+Сам скрипт: http://tiny.cc/maelstromdota_apostate
