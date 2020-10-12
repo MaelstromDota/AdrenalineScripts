@@ -24,3 +24,9 @@
 [HTML Saver - сохранение диалога как html файл](https://github.com/MaelstromDota/adrenalinscripts/blob/master/universal/html_saver.txt)
 
 [Auto Sweep | Mass Sweep - автоматический "Свип"](https://github.com/MaelstromDota/AdrenalineScripts/blob/master/universal/auto_sweep.txt)
+
+## Патчи
+### Для серверов от админа [gamethrone.ru](https://castlegame.ru/) на хрониках Gracia Epilogue [(Low-Rate Craft-PvP x30)](http://forum.castlegame.ru/threads/opisanie-igrovogo-mira.355/):
+![gamethrone Logo](/images/gamethrone.png)
+
+[Noblesse Debuff - нублес в дебафах без потери новых скиллов!](https://github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Nobless%20Debuff/Skillgrp.dat)
