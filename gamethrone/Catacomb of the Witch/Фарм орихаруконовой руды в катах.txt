@@ -1,1 +1,11 @@
-Скоро...
+{
+Фарм орехов в Catacomb of the Witch + АнтиКапча + Оповещение о ребаффе
+АнтиКапча: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/anti-captcha.txt
+Оповещение о ребаффе: github.com/MaelstromDota/AdrenalineScripts/blob/master/universal/rebuff_alarm.txt
+Требования:
+maelstromdota_witch.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch.zmap
+maelstromdota_witch_1.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch_1.zmap
+maelstromdota_witch_2.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch_2.zmap
+maelstromdota_witch_spoil.xml: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch_spoil.xml
+Загрузить все требуемые файлы в Settings
+}
