@@ -1,0 +1,23 @@
+procedure RuneGK();
+begin
+  Engine.MoveTo(37400,-48232,-1136);
+  Engine.MoveTo(38344,-48088,-1136);
+end;
+procedure RuneVirgil();
+begin
+  Engine.MoveTo(36552,-48200,912);
+  Engine.MoveTo(35928,-47672,912);
+  Engine.MoveTo(35928,-47032,1088);
+  Engine.MoveTo(35672,-46888,1152);
+  Engine.MoveTo(34984,-46936,1408);
+  Engine.MoveTo(34872,-47128,1448);
+  Engine.MoveTo(34904,-48072,1720);
+  Engine.MoveTo(34712,-48248,1744);
+  Engine.MoveTo(33672,-48200,1792);
+  Engine.MoveTo(33080,-48216,1792);
+end;
+begin
+  RuneGK();
+  Script.Pause;
+  RuneVirgil();
+end.
