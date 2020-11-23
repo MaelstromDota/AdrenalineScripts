@@ -1,13 +1,13 @@
 {
-Фарм орехов в Catacomb of the Witch + АнтиКапча + Оповещение о ребаффе
-АнтиКапча: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/anti-captcha.txt
-Оповещение о ребаффе: github.com/MaelstromDota/AdrenalineScripts/blob/master/universal/rebuff_alarm.txt
-Требования:
-maelstromdota_witch.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch.zmap
-maelstromdota_witch_1.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch_1.zmap
-maelstromdota_witch_2.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch_2.zmap
-maelstromdota_witch_spoil.xml: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch_spoil.xml
-Загрузить все требуемые файлы в Settings
+Р¤Р°СЂРј РѕСЂРµС…РѕРІ РІ Catacomb of the Witch + РћРїРѕРІРµС‰РµРЅРёРµ Рѕ СЂРµР±Р°С„С„Рµ
+РђРЅС‚РёРљР°РїС‡Р°: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/anti-captcha.txt
+РћРїРѕРІРµС‰РµРЅРёРµ Рѕ СЂРµР±Р°С„С„Рµ: github.com/MaelstromDota/AdrenalineScripts/blob/master/universal/rebuff_alarm.txt
+РўСЂРµР±РѕРІР°РЅРёСЏ:
+maelstromdota_witch.zmap
+maelstromdota_witch_1.zma
+maelstromdota_witch_2.zmap
+maelstromdota_witch_spoil.xml
+Р—Р°РіСЂСѓР·РёС‚СЊ РІСЃРµ С‚СЂРµР±СѓРµРјС‹Рµ С„Р°Р№Р»С‹ РІ Settings
 }
 uses SysUtils;
 var
@@ -17,14 +17,14 @@ var
   int: integer;
   Buff: TL2Buff;
   mob: tl2npc;
-  mobcheckdelay: cardinal = 5000; // Проверять комнату на наличие мобов каждые ...сек
-  deathcheckdelay: cardinal = 5000; // Проверять на смерть каждые ...сек
-  deathsound: string = 'Chicken'; // Звук при смерти (Sounds/ваш_звук.wav)
-  BuffID: integer = 264; // ID бафа, по которому проверять необходимость ребафа (Song of Earth)
-  RebuffTime: cardinal = 30000; // время до окончания бафа для ребафа (в мс)
-  rebuffalarmdelay: cardinal = 5000; // Задержка проверки баффов
-  rebuffalarmsound: string = 'PlayerAlarm'; // Звук оповещения ребаффа (Sounds/ваш_звук.wav)
-  rebuffalarmsoundduration: cardinal = 3500; // Длительность звука оповещения ребаффа
+  mobcheckdelay: cardinal = 5000; // РџСЂРѕРІРµСЂСЏС‚СЊ РєРѕРјРЅР°С‚Сѓ РЅР° РЅР°Р»РёС‡РёРµ РјРѕР±РѕРІ РєР°Р¶РґС‹Рµ ...СЃРµРє
+  deathcheckdelay: cardinal = 5000; // РџСЂРѕРІРµСЂСЏС‚СЊ РЅР° СЃРјРµСЂС‚СЊ РєР°Р¶РґС‹Рµ ...СЃРµРє
+  deathsound: string = 'Chicken'; // Р—РІСѓРє РїСЂРё СЃРјРµСЂС‚Рё (Sounds/РІР°С€_Р·РІСѓРє.wav)
+  BuffID: integer = 264; // ID Р±Р°С„Р°, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ РїСЂРѕРІРµСЂСЏС‚СЊ РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚СЊ СЂРµР±Р°С„Р° (Song of Earth)
+  RebuffTime: cardinal = 30000; // РІСЂРµРјСЏ РґРѕ РѕРєРѕРЅС‡Р°РЅРёСЏ Р±Р°С„Р° РґР»СЏ СЂРµР±Р°С„Р° (РІ РјСЃ)
+  rebuffalarmdelay: cardinal = 5000; // Р—Р°РґРµСЂР¶РєР° РїСЂРѕРІРµСЂРєРё Р±Р°С„С„РѕРІ
+  rebuffalarmsound: string = 'PlayerAlarm'; // Р—РІСѓРє РѕРїРѕРІРµС‰РµРЅРёСЏ СЂРµР±Р°С„С„Р° (Sounds/РІР°С€_Р·РІСѓРє.wav)
+  rebuffalarmsoundduration: cardinal = 3500; // Р”Р»РёС‚РµР»СЊРЅРѕСЃС‚СЊ Р·РІСѓРєР° РѕРїРѕРІРµС‰РµРЅРёСЏ СЂРµР±Р°С„С„Р°
 procedure DeathCheck();
 begin
   while true do
@@ -33,7 +33,7 @@ begin
     begin
       PlaySound(ExePath + 'Sounds/' + deathsound + '.wav', false);
       Engine.BlinkWindow(true);
-      print('Бот умер');
+      print('Р‘РѕС‚ СѓРјРµСЂ');
       Script.Pause;
     end;
     delay(deathcheckdelay);
@@ -44,8 +44,8 @@ var X, Y, Z: integer;
 begin
   while true do begin
     if (BuffTime(BuffID) < RebuffTime) then begin
-    PlaySound('Sounds/' + rebuffalarmsound + '.wav',false); // Заменить данный код на воспроизведении процедуры баффа
-    print('Бафы заканчиваются!');
+    PlaySound('Sounds/' + rebuffalarmsound + '.wav',false); // Р—Р°РјРµРЅРёС‚СЊ РґР°РЅРЅС‹Р№ РєРѕРґ РЅР° РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёРё РїСЂРѕС†РµРґСѓСЂС‹ Р±Р°С„С„Р°
+    print('Р‘Р°С„С‹ Р·Р°РєР°РЅС‡РёРІР°СЋС‚СЃСЏ!');
     Engine.BlinkWindow(true);
     delay(rebuffalarmsoundduration);
   end;
@@ -71,8 +71,8 @@ begin
   delay(100);
   Engine.UseSkill(60); // Fake Death
   delay(1000);
-  if not (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Если сбили Fake Death
-  delay(7000); // Подождать пока моб уйдет
+  if not (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Р•СЃР»Рё СЃР±РёР»Рё Fake Death
+  delay(7000); // РџРѕРґРѕР¶РґР°С‚СЊ РїРѕРєР° РјРѕР± СѓР№РґРµС‚
   if (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Fake Death
   delay(100);
   Engine.MoveTo(140840,85944,-5424);
@@ -81,8 +81,8 @@ begin
   delay(100);
   Engine.UseSkill(60); // Fake Death
   delay(1000);
-  if not (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Если сбили Fake Death
-  delay(7000); // Подождать пока моб уйдет
+  if not (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Р•СЃР»Рё СЃР±РёР»Рё Fake Death
+  delay(7000); // РџРѕРґРѕР¶РґР°С‚СЊ РїРѕРєР° РјРѕР± СѓР№РґРµС‚
   if (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Fake Death
   delay(100);
   Engine.MoveTo(143704,86824,-5424);
@@ -92,8 +92,8 @@ begin
   delay(100);
   Engine.UseSkill(60); // Fake Death
   delay(1000);
-  if not (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Если сбили Fake Death
-  delay(7000); // Подождать пока моб уйдет
+  if not (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Р•СЃР»Рё СЃР±РёР»Рё Fake Death
+  delay(7000); // РџРѕРґРѕР¶РґР°С‚СЊ РїРѕРєР° РјРѕР± СѓР№РґРµС‚
   if (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Fake Death
   delay(100);
   Engine.LoadZone('maelstromdota_witch_1.zmap');
@@ -103,12 +103,12 @@ procedure ToFirstRoomCheck();
 begin
   for int:=0 to npclist.count-1 do begin
     mob := npclist.items(int);
-    if mob.valid and (mob.id = 31117) then // Поиск телепортера в каты
-    if (user.distto(mob) < 300) then ToFirstRoom(); // Если он рядом, то пробежать в первую комнату
+    if mob.valid and (mob.id = 31117) then // РџРѕРёСЃРє С‚РµР»РµРїРѕСЂС‚РµСЂР° РІ РєР°С‚С‹
+    if (user.distto(mob) < 300) then ToFirstRoom(); // Р•СЃР»Рё РѕРЅ СЂСЏРґРѕРј, С‚Рѕ РїСЂРѕР±РµР¶Р°С‚СЊ РІ РїРµСЂРІСѓСЋ РєРѕРјРЅР°С‚Сѓ
     if (user.distto(mob) > 300) then
     begin
       SecondRoom();
-      Attack(); // Если далеко, то пропустить этот шаг
+      Attack(); // Р•СЃР»Рё РґР°Р»РµРєРѕ, С‚Рѕ РїСЂРѕРїСѓСЃС‚РёС‚СЊ СЌС‚РѕС‚ С€Р°Рі
     end;
   end;
 end;
@@ -132,12 +132,12 @@ begin
   begin
     SecondRoom();
     AttackAfter();
-  end; // Если чар в первой комнате, перейти во вторую
+  end; // Р•СЃР»Рё С‡Р°СЂ РІ РїРµСЂРІРѕР№ РєРѕРјРЅР°С‚Рµ, РїРµСЂРµР№С‚Рё РІРѕ РІС‚РѕСЂСѓСЋ
   if room = 2 then 
   begin
     FirstRoom();
     AttackAfter();
-  end; // Если чар во второй комнате, перейти в первую
+  end; // Р•СЃР»Рё С‡Р°СЂ РІРѕ РІС‚РѕСЂРѕР№ РєРѕРјРЅР°С‚Рµ, РїРµСЂРµР№С‚Рё РІ РїРµСЂРІСѓСЋ
 end;
 procedure CombatCheck();
 begin
@@ -152,9 +152,9 @@ function BuffTime(ID: integer): cardinal;
 var i: integer;
 begin
   result:= 0;
-  for i:= 0 to User.Buffs.Count-1 do begin        // пробегаем по списку своих бафов
-    if (User.Buffs.Items(i).id = ID) then begin   // если ID совпал, то
-      result:= User.Buffs.Items(i).EndTime;       // записываем в результат время до окончания бафа
+  for i:= 0 to User.Buffs.Count-1 do begin        // РїСЂРѕР±РµРіР°РµРј РїРѕ СЃРїРёСЃРєСѓ СЃРІРѕРёС… Р±Р°С„РѕРІ
+    if (User.Buffs.Items(i).id = ID) then begin   // РµСЃР»Рё ID СЃРѕРІРїР°Р», С‚Рѕ
+      result:= User.Buffs.Items(i).EndTime;       // Р·Р°РїРёСЃС‹РІР°РµРј РІ СЂРµР·СѓР»СЊС‚Р°С‚ РІСЂРµРјСЏ РґРѕ РѕРєРѕРЅС‡Р°РЅРёСЏ Р±Р°С„Р°
       break;
     end;
   end;
@@ -163,24 +163,24 @@ procedure MobCheck();
 begin
   for int:=0 to npclist.count-1 do begin
     mob := npclist.items(int);
-    if mob.valid and not mob.dead and mob.attackable then // Поиск живых мобов
-    if (mob.id = 21203) or (mob.id = 21159) or (mob.id = 21182) then // Поиск нужных нам мобов среди живых
-    if (user.distto(mob) < 1000) then Attack(); // Если они рядом, то начать процедуру "проверено"
-    if (user.distto(mob) > 999) then GoToOtherRoom(); // Если в комнате нет мобов, то перейти в другую
+    if mob.valid and not mob.dead and mob.attackable then // РџРѕРёСЃРє Р¶РёРІС‹С… РјРѕР±РѕРІ
+    if (mob.id = 21203) or (mob.id = 21159) or (mob.id = 21182) then // РџРѕРёСЃРє РЅСѓР¶РЅС‹С… РЅР°Рј РјРѕР±РѕРІ СЃСЂРµРґРё Р¶РёРІС‹С…
+    if (user.distto(mob) < 1000) then Attack(); // Р•СЃР»Рё РѕРЅРё СЂСЏРґРѕРј, С‚Рѕ РЅР°С‡Р°С‚СЊ РїСЂРѕС†РµРґСѓСЂСѓ "РїСЂРѕРІРµСЂРµРЅРѕ"
+    if (user.distto(mob) > 999) then GoToOtherRoom(); // Р•СЃР»Рё РІ РєРѕРјРЅР°С‚Рµ РЅРµС‚ РјРѕР±РѕРІ, С‚Рѕ РїРµСЂРµР№С‚Рё РІ РґСЂСѓРіСѓСЋ
   end;
 end;
 procedure FirstRoom();
 begin
   Engine.MoveTo(143528,88104,-5424);
   Engine.MoveTo(144424,88088,-5424);
-  room:=1; // Я в первой комнате!
+  room:=1; // РЇ РІ РїРµСЂРІРѕР№ РєРѕРјРЅР°С‚Рµ!
   Engine.LoadZone('maelstromdota_witch_1.zmap');
 end;
 procedure SecondRoom();
 begin
   Engine.MoveTo(144424,88088,-5424);
   Engine.MoveTo(143528,88104,-5424);
-  room:=2; // Я во второй комнате!
+  room:=2; // РЇ РІРѕ РІС‚РѕСЂРѕР№ РєРѕРјРЅР°С‚Рµ!
   Engine.LoadZone('maelstromdota_witch_2.zmap');
 end;
 begin
