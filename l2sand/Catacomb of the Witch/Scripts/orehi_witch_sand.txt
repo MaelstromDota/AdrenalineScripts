@@ -1,0 +1,199 @@
+{
+Фарм орехов в Catacomb of the Witch + АнтиКапча + Оповещение о ребаффе
+АнтиКапча: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/anti-captcha.txt
+Оповещение о ребаффе: github.com/MaelstromDota/AdrenalineScripts/blob/master/universal/rebuff_alarm.txt
+Требования:
+maelstromdota_witch.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch.zmap
+maelstromdota_witch_1.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch_1.zmap
+maelstromdota_witch_2.zmap: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch_2.zmap
+maelstromdota_witch_spoil.xml: github.com/MaelstromDota/AdrenalineScripts/blob/master/gamethrone/Catacomb%20of%20the%20Witch/Settings/maelstromdota_witch_spoil.xml
+Загрузить все требуемые файлы в Settings
+}
+uses SysUtils;
+var
+  owner: string = 'by SniperX';
+  github: string = 'GitHub: github.com/MaelstromDota/AdrenalineScripts';
+  room: cardinal = 0;
+  int: integer;
+  Buff: TL2Buff;
+  mob: tl2npc;
+  mobcheckdelay: cardinal = 5000; // Проверять комнату на наличие мобов каждые ...сек
+  deathcheckdelay: cardinal = 5000; // Проверять на смерть каждые ...сек
+  deathsound: string = 'Chicken'; // Звук при смерти (Sounds/ваш_звук.wav)
+  BuffID: integer = 264; // ID бафа, по которому проверять необходимость ребафа (Song of Earth)
+  RebuffTime: cardinal = 30000; // время до окончания бафа для ребафа (в мс)
+  rebuffalarmdelay: cardinal = 5000; // Задержка проверки баффов
+  rebuffalarmsound: string = 'PlayerAlarm'; // Звук оповещения ребаффа (Sounds/ваш_звук.wav)
+  rebuffalarmsoundduration: cardinal = 3500; // Длительность звука оповещения ребаффа
+procedure DeathCheck();
+begin
+  while true do
+  begin
+    if (User.dead) then
+    begin
+      PlaySound(ExePath + 'Sounds/' + deathsound + '.wav', false);
+      Engine.BlinkWindow(true);
+      print('Бот умер');
+      Script.Pause;
+    end;
+    delay(deathcheckdelay);
+  end;
+end;
+procedure RebuffAlarm();
+var X, Y, Z: integer;
+begin
+  while true do begin
+    if (BuffTime(BuffID) < RebuffTime) then begin
+    PlaySound('Sounds/' + rebuffalarmsound + '.wav',false); // Заменить данный код на воспроизведении процедуры баффа
+    print('Бафы заканчиваются!');
+    Engine.BlinkWindow(true);
+    delay(rebuffalarmsoundduration);
+  end;
+  delay(rebuffalarmdelay);
+end;
+end;
+procedure ToFirstRoom();
+begin
+  Engine.LoadZone('maelstromdota_witch.zmap');
+  Engine.SetTarget(31117); // Catacomb Gatekeeper
+  delay(1000);
+  Engine.DlgOpen();
+  delay(1000);
+  Engine.DlgSel(1); // Yes, i want to enter
+  delay(6500);
+  Engine.MoveTo(140792,79736,-5424);
+  Engine.MoveTo(140808,80504,-5424);
+  Engine.MoveTo(141864,80488,-5424);
+  Engine.MoveTo(141848,81560,-5424);
+  Engine.MoveTo(140872,81576,-5424);
+  Engine.MoveTo(140744,83736,-5424);
+  Engine.MoveTo(140792,84840,-5424);
+  delay(100);
+  Engine.UseSkill(60); // Fake Death
+  delay(1000);
+  if not (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Если сбили Fake Death
+  delay(7000); // Подождать пока моб уйдет
+  if (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Fake Death
+  delay(100);
+  Engine.MoveTo(140840,85944,-5424);
+  Engine.MoveTo(140792,86776,-5424);
+  Engine.MoveTo(142200,86808,-5424);
+  delay(100);
+  Engine.UseSkill(60); // Fake Death
+  delay(1000);
+  if not (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Если сбили Fake Death
+  delay(7000); // Подождать пока моб уйдет
+  if (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Fake Death
+  delay(100);
+  Engine.MoveTo(143704,86824,-5424);
+  Engine.MoveTo(144120,87176,-5424);
+  Engine.MoveTo(144968,87208,-5424);
+  Engine.MoveTo(144872,87832,-5424);
+  delay(100);
+  Engine.UseSkill(60); // Fake Death
+  delay(1000);
+  if not (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Если сбили Fake Death
+  delay(7000); // Подождать пока моб уйдет
+  if (User.Buffs.ByID(60, Buff)) then Engine.UseSkill(60); // Fake Death
+  delay(100);
+  Engine.LoadZone('maelstromdota_witch_1.zmap');
+  MobCheck();
+end;
+procedure ToFirstRoomCheck();
+begin
+  for int:=0 to npclist.count-1 do begin
+    mob := npclist.items(int);
+    if mob.valid and (mob.id = 31117) then // Поиск телепортера в каты
+    if (user.distto(mob) < 300) then ToFirstRoom(); // Если он рядом, то пробежать в первую комнату
+    if (user.distto(mob) > 300) then
+    begin
+      SecondRoom();
+      Attack(); // Если далеко, то пропустить этот шаг
+    end;
+  end;
+end;
+procedure Attack();
+begin
+  Engine.FaceControl(0, true);
+  delay(mobcheckdelay);
+  CombatCheck();
+end;
+procedure AttackAfter();
+begin
+  Engine.FaceControl(0, true);
+  delay(15000);
+  Engine.FaceControl(0, false);
+  Attack();
+end;
+procedure GoToOtherRoom();
+begin
+  Engine.FaceControl(0, false);
+  if room = 1 then 
+  begin
+    SecondRoom();
+    AttackAfter();
+  end; // Если чар в первой комнате, перейти во вторую
+  if room = 2 then 
+  begin
+    FirstRoom();
+    AttackAfter();
+  end; // Если чар во второй комнате, перейти в первую
+end;
+procedure CombatCheck();
+begin
+  if not User.InCombat then
+  begin
+    Engine.FaceControl(0, false);
+    GoToOtherRoom
+  end;
+  if User.InCombat then Attack();
+end;
+function BuffTime(ID: integer): cardinal;
+var i: integer;
+begin
+  result:= 0;
+  for i:= 0 to User.Buffs.Count-1 do begin        // пробегаем по списку своих бафов
+    if (User.Buffs.Items(i).id = ID) then begin   // если ID совпал, то
+      result:= User.Buffs.Items(i).EndTime;       // записываем в результат время до окончания бафа
+      break;
+    end;
+  end;
+end;
+procedure MobCheck();
+begin
+  for int:=0 to npclist.count-1 do begin
+    mob := npclist.items(int);
+    if mob.valid and not mob.dead and mob.attackable then // Поиск живых мобов
+    if (mob.id = 21203) or (mob.id = 21159) or (mob.id = 21182) then // Поиск нужных нам мобов среди живых
+    if (user.distto(mob) < 1000) then Attack(); // Если они рядом, то начать процедуру "проверено"
+    if (user.distto(mob) > 999) then GoToOtherRoom(); // Если в комнате нет мобов, то перейти в другую
+  end;
+end;
+procedure FirstRoom();
+begin
+  Engine.MoveTo(143528,88104,-5424);
+  Engine.MoveTo(144424,88088,-5424);
+  room:=1; // Я в первой комнате!
+  Engine.LoadZone('maelstromdota_witch_1.zmap');
+end;
+procedure SecondRoom();
+begin
+  Engine.MoveTo(144424,88088,-5424);
+  Engine.MoveTo(143528,88104,-5424);
+  room:=2; // Я во второй комнате!
+  Engine.LoadZone('maelstromdota_witch_2.zmap');
+end;
+begin
+  print(owner);
+  print(github);
+  Engine.FaceControl(0, false);
+  delay(555);
+  Script.NewThread(@DeathCheck);
+  delay(100);
+  Script.NewThread(@RebuffAlarm);
+  delay(555);
+  Engine.LoadConfig('maelstromdota_witch_spoil.xml');
+  delay(100);
+  ToFirstRoomCheck();
+  delay(-1)
+end.
