@@ -21,6 +21,6 @@ begin
   Engine.MoveTo(39816,147976,-3696);
   Engine.MoveTo(41720,148168,-3680);
   Engine.MoveTo(43592,148232,-3680);
-  print('Я добрался до места назначения!');
+  print('РЇ РґРѕР±СЂР°Р»СЃСЏ РґРѕ РјРµСЃС‚Р° РЅР°Р·РЅР°С‡РµРЅРёСЏ!');
   PlaySound('Sounds/Good.wav', false);
 end.
