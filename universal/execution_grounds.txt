@@ -1,0 +1,26 @@
+begin
+  Engine.MoveTo(16568,143960,-2912);
+  Engine.MoveTo(17416,143272,-3024);
+  Engine.MoveTo(18488,142360,-3040);
+  Engine.MoveTo(20248,141000,-3376);
+  Engine.MoveTo(22168,140328,-3552);
+  Engine.MoveTo(23768,139240,-3504);
+  Engine.MoveTo(25560,137624,-3312);
+  Engine.MoveTo(27224,136776,-3216);
+  Engine.MoveTo(28888,137064,-3136);
+  Engine.MoveTo(30488,136648,-3088);
+  Engine.MoveTo(30840,137672,-3072);
+  Engine.MoveTo(30360,138152,-3072);
+  Engine.MoveTo(31032,139128,-3136);
+  Engine.MoveTo(32152,139496,-3200);
+  Engine.MoveTo(32632,140504,-3184);
+  Engine.MoveTo(32888,142248,-3200);
+  Engine.MoveTo(33288,144968,-3408);
+  Engine.MoveTo(34200,147256,-3504);
+  Engine.MoveTo(37192,148344,-3680);
+  Engine.MoveTo(39816,147976,-3696);
+  Engine.MoveTo(41720,148168,-3680);
+  Engine.MoveTo(43592,148232,-3680);
+  print('Я добрался до места назначения!');
+  PlaySound('Sounds/Good.wav', false);
+end.
