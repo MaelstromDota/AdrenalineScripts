@@ -1,0 +1,43 @@
+var
+  undead: boolean = true; // true - идти к нежитям, false - не идти к нежитям
+procedure ImperialTombWallOfArgos();
+begin
+  Engine.MoveTo(188376,-74088,-2688);
+  Engine.MoveTo(189992,-72264,-2624);
+  Engine.MoveTo(190296,-71272,-2576);
+  Engine.MoveTo(189672,-69992,-2576);
+  Engine.MoveTo(190440,-68456,-2608);
+  Engine.MoveTo(191848,-67928,-2672);
+  Engine.MoveTo(194120,-66120,-2864);
+  Engine.MoveTo(194312,-65432,-2864);
+  Engine.MoveTo(194664,-65144,-2776);
+  Engine.MoveTo(194248,-64808,-2856);
+  Engine.MoveTo(194200,-64376,-2880);
+  Engine.MoveTo(193688,-63560,-2880);
+  Engine.MoveTo(194056,-62296,-2840);
+  Engine.MoveTo(193992,-61528,-2816);
+  Engine.MoveTo(193848,-61160,-2832);
+end;
+procedure WallOfArgosUndead();
+begin
+  Engine.MoveTo(193352,-60168,-2912);
+  Engine.MoveTo(193112,-59512,-2864);
+  Engine.MoveTo(192728,-59272,-2824);
+  Engine.MoveTo(192568,-59144,-2848);
+  Engine.MoveTo(192312,-59080,-2864);
+  Engine.MoveTo(191720,-59384,-2848);
+  Engine.MoveTo(190904,-59656,-2856);
+  Engine.MoveTo(190040,-59928,-2976);
+  Engine.MoveTo(189912,-60680,-2904);
+  Engine.MoveTo(190088,-61016,-2864);
+  Engine.MoveTo(190584,-61624,-2936);
+  Engine.MoveTo(189992,-62280,-2896);
+  Engine.MoveTo(190040,-62552,-2864);
+  Engine.MoveTo(189160,-62776,-2752);
+  Engine.MoveTo(188552,-63496,-2752);
+  Engine.MoveTo(187688,-63688,-2896);
+end;
+begin
+  ImperialTombWallOfArgos();
+  if (undead = true) then WallOfArgosUndead();
+end.
