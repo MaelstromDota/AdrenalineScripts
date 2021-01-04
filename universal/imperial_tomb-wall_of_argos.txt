@@ -1,5 +1,5 @@
 var
-  undead: boolean = true; // true - идти к нежитям, false - не идти к нежитям
+  undead: boolean = true; // true - РёРґС‚Рё Рє РЅРµР¶РёС‚СЏРј, false - РЅРµ РёРґС‚Рё Рє РЅРµР¶РёС‚СЏРј
 procedure ImperialTombWallOfArgos();
 begin
   Engine.MoveTo(188376,-74088,-2688);
