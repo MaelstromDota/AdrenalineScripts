@@ -24,6 +24,11 @@
 
 [Auto Sweep | Mass Sweep - автоматический "Свип"](https://github.com/MaelstromDota/AdrenalineScripts/blob/master/universal/auto_sweep.txt)
 
+### Другое
+![epilogue Logo](/images/epilogue.png)
+
+[CTF solver](http://tiny.cc/70m7tz)
+
 ## Патчи
 ### Для серверов от админа [gamethrone.ru](https://castlegame.ru/) на хрониках Gracia Epilogue [(Low-Rate Craft-PvP x30)](http://forum.castlegame.ru/threads/opisanie-igrovogo-mira.355/):
 ![gamethrone Logo](/images/gamethrone.png)
