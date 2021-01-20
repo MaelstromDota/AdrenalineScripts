@@ -1,0 +1,83 @@
+var
+  owner: string = 'by SniperX';
+  github: string = 'GitHub: github.com/MaelstromDota/AdrenalineScripts';
+  FarmerNick: string = 'GoFarm'; // Ник фармера
+  SummonID: cardinal = 1403; // ID суммона
+  SummonerNick: string = 'farmer'; // Суммонер, который будет стоять у Mysterious Necromancer
+  SummonerGraveNick: string = 'farmer2'; // Суммонер возле статуи
+  captchasound: string = 'PlayerAlarm'; // Звук капчи
+  
+function InParty(): boolean;
+begin
+  result:= Party.Chars.Count > 0;   // если кол-во игроков в нашей пати > 0, то вернёт true 
+end;
+
+function Relog(CharIndex: integer = -1): boolean;   // релогается на персонажа с указанным номером
+var i: integer;
+begin
+  result:= false; 
+  if (CharIndex > 6) then exit;                               // выходим, если некорректный индекс персонажа
+  while (User.InCombat) do delay(99);                         // ждем пока не выйдем из боя 
+  if Engine.Restart then                                      // если удалось сделать рестарт, то
+    while (Engine.Status = lsOnline) do delay(999);           // ждем, пока не выйдем на панель выбора персонажей
+  Delay(5000);                                                // ждем дополнительно 5 сек для прогрузки
+  if (CharIndex = -1) then begin                              // если индекс персонажа не был указан, то
+    {if Engine.GameStart() then                                // заходим на того же персонажа что и был
+      while (Engine.Status <> lsOnline) do delay(999);}        // и ждем входа в игру
+      print('Вы что думали? Это фри адрик, тут не работает');
+  end else begin                                              // если же индекс персонажа был указан, то
+    if Engine.GameStart(CharIndex) then                       // заходим на персонажа с указанным номером
+      while (Engine.Status <> lsOnline) do delay(999);        // и аналогично ждем входа в игру
+  end; 
+  Delay(5000);                                                // ждем дополнительное время для прогрузки
+  result:= true;
+end;
+
+procedure AntiCaptcha();
+var Captcha:string;
+begin
+  while true do
+    begin
+      delay(500) ;
+        if Captcha <> Engine.DlgText then
+          begin
+            Captcha := Engine.DlgText; // Проверка на наличие диалога
+              if (Pos('защиты от ботов', Captcha) <> 0) or (Pos('bot protection', Captcha) <> 0) then // Проверка на содержание диалогового окна
+                begin
+                  print('Капча обнаружена!');
+                  PlaySound('Sounds/' + captchasound + '.wav',false);
+                  Engine.BlinkWindow(true); // Мигание окна
+                end;
+                Delay(1800);
+          end;
+    end;
+end;
+
+procedure Main();
+begin
+  while (Engine.Status <> lsOnline) do begin
+    if InParty() then begin
+     delay(500);
+     print('Делаю суммон');
+     Engine.SetTarget(FarmerNick);
+     delay(555);
+     Engine.UseSkill(SummonID);
+     delay(10000); // Ждем пока фармер свалит с пати
+     if InParty() then begin // Если наш фармер не свалил, то релог на другого чара. Наша проверка на надобность смены чара (ShMem в фри не работает :c)
+       Engine.LeaveParty();
+       delay(555);
+       if (User.name = SummonerNick) then Relog(1); // Если мы суммонер к Mysterious Necromancer, то релогнуться на суммонера к статуе
+       if (User.name = SummonerGraveNick) then Relog(0); // Если мы суммонер к статуе, релогнуться к суммонеру к Mysterious Necromancer
+     end;
+   end;
+  delay(1800);
+  end;
+end;
+
+begin
+  print(owner);
+  print(github);
+  Script.NewThread(@AntiCaptcha);
+  delay(555);
+  Script.NewThread(@Main);
+end.

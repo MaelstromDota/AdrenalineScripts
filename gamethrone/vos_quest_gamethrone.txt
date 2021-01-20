@@ -1,0 +1,232 @@
+uses
+  SysUtils, StdCtrls, Controls, Forms, Dialogs, Classes;
+
+{
+Динамик байпасы препятствует автономному квесту
+Требования:
+2 суммонера 56 лвл на одном логине (поставить самого первого у Mysterious Necromancer, второго у статуи) со скриптом: 
+
+}
+
+var
+  owner: string = 'by SniperX';
+  github: string = 'GitHub: github.com/MaelstromDota/AdrenalineScripts';
+  SummonerNick: string = 'farmer'; // Суммонер, который будет стоять у Mysterious Necromancer
+  SummonerGraveNick: string = 'farmer2'; // Суммонер возле статуи
+  alarmsound: string = 'hp'; // Звук оповещениq (Sounds/звук.wav)
+  captchasound: string = 'PlayerAlarm'; // Звук капчи
+  DLG,Rez,D1,D2: string;
+  ResulttBypass,tmpp_bypass:string;
+  i_bypasss,kk:integer;
+  NeedText: string = '">"Получить Энрию."'; // Прошлая награда ("> не трогать)
+  NeedText2: string = '"Получить Отвердитель Формы."'; // Нужная нам награда
+  
+procedure BuffMage;
+begin
+  print('Ребафнись и не забудь старт скрипт');
+  PlaySound('Sounds/' + alarmsound + '.wav',false);
+  Engine.BlinkWindow(true);
+  Script.Pause;
+end;
+
+procedure TeleportToValleyOfSaint;
+begin
+  Engine.InviteParty(SummonerNick);
+  delay(13000);
+  Engine.ConfirmDialog(true);
+  delay(5600);
+  Engine.LeaveParty;
+end;
+
+procedure TeleportToValleyOfSaintt;
+begin
+  Engine.InviteParty(SummonerNick);
+  delay(13000);
+  Engine.ConfirmDialog(true);
+end;
+
+procedure TeleportToValleyOfSaintGraveArea;
+begin 
+  Engine.InviteParty(SummonerGraveNick);
+  delay(13000);
+  Engine.ConfirmDialog(true);
+end;
+
+procedure BypassNeedText(findme: string; beforeme: string);
+begin
+  if (pos(NeedText, Engine.DlgText)) <> 0 then
+    begin 
+      print('good');
+      FindText(findme, beforeme);
+      FindBypass();
+      delay(3000);
+      L := TStringList.Create;          //Создаем объект (список для строк)
+  L.Add(Engine.DlgText);                 //Добавляем в список строку
+  L.SaveToFile(ExePath + 'html\myhtml' + DateToStr(Date) + '_' + IntToStr(Engine.ServerTime) + '.html');  //Сохраняем список в файл
+  L.Free;  
+      Script.Pause;
+      //Engine.UseItem(5588); // Перебить последний диалог
+      //Engine.BypassToServer(ResultBypass, True);
+    end;
+end;
+
+procedure FindText(D1: string; D2: string);
+begin
+  DLG := Engine.DlgText; // Парсит диалог
+  Rez :=Copy(DLG,Pos(D1,DLG)+40,Pos(D2,DLG)-Pos(D1,DLG)-42); // Находит строчку с байпассом
+end;
+
+procedure FindBypasser();
+begin
+  ResulttBypass:='';
+  tmpp_bypass := Rez + '"';
+  i_bypasss:=pos('bypass -h',tmpp_bypass);
+  i_bypasss:=i_bypasss + 10;
+  while not (tmpp_bypass[i_bypasss] = ' ') // Находит начало байпасса
+  and not (tmpp_bypass[i_bypasss] = '"') do // Пока не закончится строчка байпассов
+  begin
+    ResulttBypass:= ResulttBypass + tmpp_bypass[i_bypass];
+    i_bypasss:= i_bypasss+1; // Делает наш байпасс
+  end;
+  print(ResulttBypass);
+end;
+
+procedure AntiCaptcha();
+var Captcha:string;
+begin
+  while true do
+    begin
+      delay(500) ;
+        if Captcha <> Engine.DlgText then
+          begin
+            Captcha := Engine.DlgText; // Проверка на наличие диалога
+              if (Pos('защиты от ботов', Captcha) <> 0) or (Pos('bot protection', Captcha) <> 0) then // Проверка на содержание диалогового окна
+                begin
+                  print('Капча обнаружена!');
+                  PlaySound('Sounds/' + captchasound + '.wav',false);
+                  Engine.BlinkWindow(true); // Мигание окна
+                end;
+                Delay(1800);
+          end;
+    end;
+end;
+
+procedure QuestVoS;
+var
+  item: TL2Item;
+begin
+  print('--------------------------');
+  BuffMage;
+  Delay(2000);
+  print('Суммонюсь в VoS');
+  TeleportToValleyOfSaint;
+  Delay(2000);
+  print('Беру квест');
+  TakeQuest;
+  print('Выбиваю квест итемы');
+  Engine.FaceControl (0, true);
+  while CheckItemCount(7171, True) < 300 do 
+  begin
+    Delay (10 * 1000);
+  end;
+  print('Выбил квест итемы');
+  Engine.FaceControl (0, false);
+  Delay(2000);
+ if User.InCombat then
+    begin
+     print('Отбиваюсь от мобов');
+     saveSelf;
+    end; 
+    Delay(20000);
+    print('Сдаю квест итемы');
+	  TeleportToValleyOfSaintt;
+	  Delay(2000);
+    TakeQuest;
+    Delay(2000);
+    print('Иду к статуе');
+    TeleportToValleyOfSaintGraveArea;
+    Delay(2000);
+    GiveQuestItem;
+    Delay(2000);
+    print('Получаю награду');
+    TeleportToValleyOfSaint;
+    Delay(2000);
+    TakeQuest;
+    Delay(2000);
+    print('Забирай награду');
+    PlaySound();
+    BypassNeedText(NeedText, NeedText2);
+    Script.Pause;
+end;
+procedure TakeQuest;
+begin 
+  Engine.SetTarget(31518); // select Mysterious Necromancer
+  Engine.DlgOpen;
+  Delay (200);
+  Engine.DlgSel(1);  // Take Quest  - step1
+  Delay(1000);
+  FindBypass();  // Take Quest  - step2
+  Delay(1000);
+end;
+
+procedure FindBypass();
+  var ResultBypass,tmp_bypass:string;
+  var i_bypass,k:integer;
+  begin
+    ResultBypass:='';
+    tmp_bypass := Engine.DlgText;
+    i_bypass:=pos('bypass -h',tmp_bypass);
+    i_bypass:=i_bypass + 10;
+    while not (tmp_bypass[i_bypass] = ' ')
+    and not (tmp_bypass[i_bypass] = '"') do
+    begin
+      ResultBypass:= ResultBypass + tmp_bypass[i_bypass];
+      i_bypass:= i_bypass+1;
+    end;
+  Engine.BypassToServer(ResultBypass, True);
+end;
+
+procedure GiveQuestItem;
+begin
+  Engine.SetTarget(31519); // select Статуя
+  Engine.DlgOpen;				// open chat with NPC
+  Delay (200);
+  Engine.DlgSel(1);  // Take Quest  - step1
+  Delay(1000);
+  FindBypass();  // Take Quest  - step2
+  Delay(1000);
+end;  
+
+procedure saveSelf;
+begin
+  while (not User.Target.Dead) and (User.target <> nil) do
+    begin
+      Engine.FaceControl (0, true);
+      delay(500);
+    end;
+  if (User.Target.Dead) and (User.target <> nil) then
+    begin
+      Engine.FaceControl (0, false);
+      delay(1500);
+    end;
+end;
+
+function CheckItemCount (const itemID: Integer; const quest: Boolean = False) : Integer;
+var tempItem: TL2Item;
+begin
+   if quest then Inventory.Quest.ByID(itemID, tempItem)
+   else Inventory.User.ByID(itemID, tempItem);
+   Result := tempItem.Count;
+end;
+
+begin
+  print(owner);
+  print(github);
+  Engine.FaceControl (0, false);
+  //Engine.LoadZone('maelstromdota_vos.zmap');
+  Script.NewThread(@AntiCaptcha_Thread);
+  while CheckItemCount(4041, True) < 300 do 
+  begin
+      QuestVoS; 
+  end;
+end.
